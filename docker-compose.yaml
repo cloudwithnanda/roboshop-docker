@@ -7,6 +7,7 @@ services:
     networks:
       - roboshop
 
+
   catalogue:
     image: catalogue:1
     container_name: catalogue
@@ -14,6 +15,7 @@ services:
       - "8081:8081"
     networks:
       - roboshop
+
 
   web:
     build: web:latest
@@ -24,8 +26,7 @@ services:
       - catalogue
     networks:
       - roboshop
-  
 
-  networks:
-    roboshop:
-      driver: bridge
+networks:
+  roboshop:
+    driver: bridge
