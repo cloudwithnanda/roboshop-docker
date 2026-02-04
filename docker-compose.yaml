@@ -1,6 +1,6 @@
 services:
   mongodb:
-    build: mongodb:1
+    build: mongodb:v1
     container_name: mongodb
     volumes:
       - mongo-data:/data/db
@@ -9,7 +9,7 @@ services:
 
 
   catalogue:
-    image: catalogue:1
+    image: catalogue:v1
     container_name: catalogue
     ports:
       - "8081:8081"
@@ -18,7 +18,7 @@ services:
 
 
   web:
-    build: web:latest
+    build: web:v1
     container_name: web
     ports:
       - "80:80"
