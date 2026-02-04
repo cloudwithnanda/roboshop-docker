@@ -1,0 +1,31 @@
+services:
+  mongodb:
+    build: mongodb:1
+    container_name: mongodb
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - roboshop
+
+  catalogue:
+    image: catalogue:1
+    container_name: 
+    ports:
+      - "8081:8081"
+    networks:
+      - roboshop
+
+  web:
+    build: web:latest
+    container_name: web
+    ports:
+      - "80:80"
+    depends_on:
+      - catalogue
+    networks:
+      - roboshop
+  
+
+  networks:
+    roboshop:
+      driver: bridge
