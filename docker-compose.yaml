@@ -1,12 +1,11 @@
 services:
   mongodb:
-    build: mongodb:v1
+    image: mongodb:v1
     container_name: mongodb
     volumes:
       - mongo-data:/data/db
     networks:
       - roboshop
-
 
   catalogue:
     image: catalogue:v1
@@ -16,9 +15,8 @@ services:
     networks:
       - roboshop
 
-
   web:
-    build: web:v1
+    image: web:v1
     container_name: web
     ports:
       - "80:80"
