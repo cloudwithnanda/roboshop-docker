@@ -1,0 +1,384 @@
+history
+    1  13/01/26 18:30:51 sudo dnf update -y
+    2  13/01/26 18:30:51 sudo dnf update -y
+    3  13/01/26 18:37:26 sudo init 0
+    4  04/02/26 10:22:08 clear
+    5  04/02/26 10:24:03 touch docker_install.sh
+    6  04/02/26 10:24:08 cd docker_install.sh
+    7  04/02/26 10:24:13 vim docker_install.sh
+    8  04/02/26 10:25:20 cat docker_install.sh
+    9  04/02/26 10:25:26 bash docker_install.sh
+   10  04/02/26 10:26:33 clear
+   11  04/02/26 10:26:42 docker --version
+   12  04/02/26 10:27:19 git clone https://github.com/cloudwithnanda/roboshop-docker.git
+   13  04/02/26 10:27:28 cd roboshop-docker/mongodb/
+   14  04/02/26 10:27:50 docker build -t mongodb:v1 .
+   15  04/02/26 10:29:34 docker network create roboshop
+   16  04/02/26 10:29:46 docker network ls
+   17  04/02/26 10:30:03 docker volume create roboshop
+   18  04/02/26 10:31:23 docker run -d --name mongodb --network roboshop -v roboshop mongodb:v1
+   19  04/02/26 10:31:36 docker ps
+   20  04/02/26 10:31:49 docker images
+   21  04/02/26 10:32:15 cd ../catalouge/
+   22  04/02/26 10:32:22 df -ht
+   23  04/02/26 10:32:26 df -h
+   24  04/02/26 10:32:43 df -h | /var/lib
+   25  04/02/26 10:32:56 df -h | ../../var/lib
+   26  04/02/26 10:33:33 docker build -t catalogue:v1 .
+   27  04/02/26 10:36:42 lsblk                      # see new disk (nvme1n1)
+   28  04/02/26 10:36:42 sudo mkfs.xfs /dev/nvme1n1   # only first time
+   29  04/02/26 10:36:43 sudo mount /dev/nvme1n1 /var/lib/docker
+   30  04/02/26 10:37:16 sudo blkid /dev/nvme1n1
+   31  04/02/26 10:37:16 sudo nano /etc/fstab
+   32  04/02/26 10:37:36 UUID=xxxx  /var/lib/docker  xfs  defaults,nofail  0 0
+   33  04/02/26 10:37:52 sudo mount -a
+   34  04/02/26 10:38:23 sudo vi /etc/fstab
+   35  04/02/26 10:39:44 sudo mount -a
+   36  04/02/26 10:39:53 df -h /var/lib/docker
+   37  04/02/26 10:40:32 docker info | grep "Docker Root Dir"
+   38  04/02/26 10:40:44 docker build -t catalogue:v1 .
+   39  04/02/26 10:41:26 sudo mkdir -p /var/lib/docker/tmp
+   40  04/02/26 10:41:26 sudo chown root:root /var/lib/docker/tmp
+   41  04/02/26 10:41:26 sudo chmod 711 /var/lib/docker/tmp
+   42  04/02/26 10:41:26 sudo systemctl restart docker
+   43  04/02/26 10:43:07 clear
+   44  04/02/26 10:43:17 cd roboshop-docker/catalouge/
+   45  04/02/26 10:43:30 docker images
+   46  04/02/26 10:44:01 docker build -t catalouge:v1 .
+   47  04/02/26 10:45:09 sudo systemctl stop docker
+   48  04/02/26 10:45:09 sudo systemctl stop containerd
+   49  04/02/26 10:45:27 sudo mkdir -p /var/lib/docker/containerd
+   50  04/02/26 10:45:27 sudo rsync -avx /var/lib/containerd/ /var/lib/docker/containerd/
+   51  04/02/26 10:45:27 sudo mv /var/lib/containerd /var/lib/containerd.bak
+   52  04/02/26 10:45:27 sudo ln -s /var/lib/docker/containerd /var/lib/containerd
+   53  04/02/26 10:46:03 sudo yum install rsync -y
+   54  04/02/26 10:46:35 sudo mkdir -p /var/lib/docker/containerd
+   55  04/02/26 10:46:35 sudo rsync -avx /var/lib/containerd/ /var/lib/docker/containerd/
+   56  04/02/26 10:46:35 sudo mv /var/lib/containerd /var/lib/containerd.bak
+   57  04/02/26 10:46:35 sudo ln -s /var/lib/docker/containerd /var/lib/containerd
+   58  04/02/26 10:46:47 sudo systemctl start containerd
+   59  04/02/26 10:46:48 sudo systemctl start docker
+   60  04/02/26 10:47:04 df -h /var/lib/containerd
+   61  04/02/26 10:47:13 sudo df -h /var/lib/containerd
+   62  04/02/26 10:47:39 sudo usermod -aG docker ec2-user
+   63  04/02/26 10:48:11 clear
+   64  04/02/26 10:48:25 cd roboshop-docker/catalouge/
+   65  04/02/26 10:48:30 clear
+   66  04/02/26 10:48:36 docker ps
+   67  04/02/26 10:48:44 docker images
+   68  04/02/26 10:48:51 cd ../mongodb/
+   69  04/02/26 10:49:14 docker build -t mongodb:v1 .
+   70  04/02/26 10:52:38 docker network create roboshop
+   71  04/02/26 10:52:52 docker volume create roboshop
+   72  04/02/26 10:53:49 docker run -d --name mongodb --network roboshop -v roboshop mongodb:v1
+   73  04/02/26 10:54:04 cd ../catalouge/
+   74  04/02/26 10:54:28 docker build -t catalouge:v1 .
+   75  04/02/26 10:56:09 docker run -d --name cataloge --network roboshop catalouge:v1
+   76  04/02/26 10:56:22 cd ../web/
+   77  04/02/26 10:56:50 docker build -t web:v1 .
+   78  04/02/26 10:58:18 git pull
+   79  04/02/26 10:58:22 docker build -t web:v1 .
+   80  04/02/26 11:00:30 docker run --name web -p 80:80 --network roboshop web:v1
+   81  04/02/26 11:00:44 docker ps
+   82  04/02/26 11:01:50 docker network inspect roboshop
+   83  04/02/26 11:03:02 docker rm
+   84  04/02/26 11:03:17 docke ps
+   85  04/02/26 11:03:24 docker ps
+   86  04/02/26 11:03:40 docker rm b22a78628f39
+   87  04/02/26 11:03:55 docker stop b22a78628f39
+   88  04/02/26 11:04:12 docker rm b22a78628f39
+   89  04/02/26 11:04:55 docker ps
+   90  04/02/26 11:05:36 docker stop 4f6f00320c38
+   91  04/02/26 11:06:25 docker rm 4f6f00320c38
+   92  04/02/26 11:07:41 docker volume inspect roboshop
+   93  04/02/26 11:09:06 docker run -d --name mongodb --network roboshop -v roboshop:/data/db mongodb:v1
+   94  04/02/26 11:12:10 docker run -d --name catalouge --network roboshop catalouge:v1
+   95  04/02/26 11:12:39 docker run --name web -p 80:80 --network roboshop web:v1
+   96  04/02/26 11:12:54 docker ps
+   97  04/02/26 11:13:18 docker ps -a
+   98  04/02/26 11:13:38 docker rm 36c5d2f3fb54
+   99  04/02/26 11:14:06 docker run -d  --name web -p 80:80 --network roboshop web:v1
+  100  04/02/26 11:18:34 docker ps
+  101  04/02/26 11:18:48 docker images
+  102  04/02/26 11:19:02 docker run -d  --name web -p 80:80 --network roboshop web:v1
+  103  04/02/26 11:19:15 docker ps -a
+  104  04/02/26 11:19:49 docker rm a73306719746
+  105  04/02/26 11:19:54 docker ps
+  106  04/02/26 11:20:02 docker ps -a
+  107  04/02/26 11:20:13 docker run -d  --name web -p 80:80 --network roboshop web:v1
+  108  04/02/26 11:20:19 docker ps
+  109  04/02/26 11:20:33 docker ps -a
+  110  04/02/26 11:21:45 docker rm f5c0fda2e015
+  111  04/02/26 11:22:01 docker run --name web -p 80:80 --network roboshop web:v1
+  112  04/02/26 11:23:36 docker ps | grep catalogue
+  113  04/02/26 11:24:32 docker ps -a | grep catalogue
+  114  04/02/26 11:25:29 docker rm -f 76e313370939
+  115  04/02/26 11:25:53 docker run -d --name catalogue --network roboshop catalogue:v1
+  116  04/02/26 11:26:13 cd ../catalouge/
+  117  04/02/26 11:26:22 docker run -d --name catalogue --network roboshop catalogue:v1
+  118  04/02/26 11:26:32 docker images
+  119  04/02/26 11:27:11 docker run -d --name catalouge --network roboshop catalouge:v1
+  120  04/02/26 11:27:17 cd ../web/
+  121  04/02/26 11:27:36 docker run -d --name web -p 80:80 --network roboshop web:v1
+  122  04/02/26 11:27:45 docker ps -a
+  123  04/02/26 11:28:16 docker rm 28de5d276a47
+  124  04/02/26 11:28:26 docker run --name web -p 80:80 --network roboshop web:v1
+  125  04/02/26 11:28:59 docker exec -it catalogue bash
+  126  04/02/26 11:29:06 docker ps
+  127  04/02/26 11:29:42 docker ps - o wide
+  128  04/02/26 11:30:45 docker ps --no-trunc
+  129  04/02/26 11:31:17 cd ../catalouge/
+  130  04/02/26 11:31:21 docker exec -it catalogue bash
+  131  04/02/26 11:31:38 docker exec -it catalogue:v1 bash
+  132  04/02/26 11:32:01 docker ps
+  133  04/02/26 11:32:18 docker exec -it 2a160076b2ed bash
+  134  04/02/26 11:36:02 docker network inspect roboshop
+  135  04/02/26 11:39:18 docker ps
+  136  04/02/26 11:39:45 docker rm 2a160076b2ed
+  137  04/02/26 11:39:55 docker stop 2a160076b2ed
+  138  04/02/26 11:42:41 docker rm 2a160076b2ed
+  139  04/02/26 11:42:48 docker images
+  140  04/02/26 11:43:08 docker rmi cbfa5c87d52a
+  141  04/02/26 11:44:35 git pull
+  142  04/02/26 11:45:15 cd ..
+  143  04/02/26 11:45:17 ll
+  144  04/02/26 11:45:24 cd catalogue/
+  145  04/02/26 11:45:52 docker build -t catalogue:v1 .
+  146  04/02/26 11:46:17 docker run -d --name catalogue --network roboshop catalogue:v1
+  147  04/02/26 11:46:22 cd ..
+  148  04/02/26 11:46:25 docker ps
+  149  04/02/26 11:46:30 docker ps -a
+  150  04/02/26 11:47:11 docker rm f7c9a9502e34
+  151  04/02/26 11:47:53 docker run -d --name web -p 80:80 --network roboshop web:v1
+  152  04/02/26 11:48:00 docker ps
+  153  04/02/26 11:51:07 docker logs
+  154  04/02/26 10:22:08 clear
+  155  04/02/26 10:24:03 touch docker_install.sh
+  156  04/02/26 10:24:08 cd docker_install.sh
+  157  04/02/26 10:24:13 vim docker_install.sh
+  158  04/02/26 10:25:20 cat docker_install.sh
+  159  04/02/26 10:25:26 bash docker_install.sh
+  160  04/02/26 10:48:11 clear
+  161  04/02/26 10:48:25 cd roboshop-docker/catalouge/
+  162  04/02/26 10:48:30 clear
+  163  04/02/26 10:48:36 docker ps
+  164  04/02/26 10:48:44 docker images
+  165  04/02/26 10:48:51 cd ../mongodb/
+  166  04/02/26 10:49:14 docker build -t mongodb:v1 .
+  167  04/02/26 10:52:38 docker network create roboshop
+  168  04/02/26 10:52:52 docker volume create roboshop
+  169  04/02/26 10:53:49 docker run -d --name mongodb --network roboshop -v roboshop mongodb:v1
+  170  04/02/26 10:54:04 cd ../catalouge/
+  171  04/02/26 10:54:28 docker build -t catalouge:v1 .
+  172  04/02/26 10:56:09 docker run -d --name cataloge --network roboshop catalouge:v1
+  173  04/02/26 10:56:22 cd ../web/
+  174  04/02/26 10:56:50 docker build -t web:v1 .
+  175  04/02/26 10:58:18 git pull
+  176  04/02/26 10:58:22 docker build -t web:v1 .
+  177  04/02/26 11:00:30 docker run --name web -p 80:80 --network roboshop web:v1
+  178  04/02/26 11:00:44 docker ps
+  179  04/02/26 11:01:50 docker network inspect roboshop
+  180  04/02/26 11:03:02 docker rm
+  181  04/02/26 11:03:17 docke ps
+  182  04/02/26 11:03:24 docker ps
+  183  04/02/26 11:03:40 docker rm b22a78628f39
+  184  04/02/26 11:03:55 docker stop b22a78628f39
+  185  04/02/26 11:04:12 docker rm b22a78628f39
+  186  04/02/26 11:04:55 docker ps
+  187  04/02/26 11:05:36 docker stop 4f6f00320c38
+  188  04/02/26 11:06:25 docker rm 4f6f00320c38
+  189  04/02/26 11:07:41 docker volume inspect roboshop
+  190  04/02/26 11:09:06 docker run -d --name mongodb --network roboshop -v roboshop:/data/db mongodb:v1
+  191  04/02/26 11:12:10 docker run -d --name catalouge --network roboshop catalouge:v1
+  192  04/02/26 11:12:39 docker run --name web -p 80:80 --network roboshop web:v1
+  193  04/02/26 11:12:54 docker ps
+  194  04/02/26 11:13:18 docker ps -a
+  195  04/02/26 11:13:38 docker rm 36c5d2f3fb54
+  196  04/02/26 11:14:06 docker run -d  --name web -p 80:80 --network roboshop web:v1
+  197  04/02/26 11:18:34 docker ps
+  198  04/02/26 11:18:48 docker images
+  199  04/02/26 11:19:02 docker run -d  --name web -p 80:80 --network roboshop web:v1
+  200  04/02/26 11:19:15 docker ps -a
+  201  04/02/26 11:19:49 docker rm a73306719746
+  202  04/02/26 11:19:54 docker ps
+  203  04/02/26 11:20:02 docker ps -a
+  204  04/02/26 11:20:13 docker run -d  --name web -p 80:80 --network roboshop web:v1
+  205  04/02/26 11:20:19 docker ps
+  206  04/02/26 11:20:33 docker ps -a
+  207  04/02/26 11:21:45 docker rm f5c0fda2e015
+  208  04/02/26 11:22:01 docker run --name web -p 80:80 --network roboshop web:v1
+  209  04/02/26 11:23:36 docker ps | grep catalogue
+  210  04/02/26 11:24:32 docker ps -a | grep catalogue
+  211  04/02/26 11:25:29 docker rm -f 76e313370939
+  212  04/02/26 11:25:53 docker run -d --name catalogue --network roboshop catalogue:v1
+  213  04/02/26 11:26:13 cd ../catalouge/
+  214  04/02/26 11:26:22 docker run -d --name catalogue --network roboshop catalogue:v1
+  215  04/02/26 11:26:32 docker images
+  216  04/02/26 11:27:11 docker run -d --name catalouge --network roboshop catalouge:v1
+  217  04/02/26 11:27:17 cd ../web/
+  218  04/02/26 11:27:36 docker run -d --name web -p 80:80 --network roboshop web:v1
+  219  04/02/26 11:27:45 docker ps -a
+  220  04/02/26 11:28:16 docker rm 28de5d276a47
+  221  04/02/26 11:28:26 docker run --name web -p 80:80 --network roboshop web:v1
+  222  04/02/26 11:28:59 docker exec -it catalogue bash
+  223  04/02/26 11:29:06 docker ps
+  224  04/02/26 11:29:42 docker ps - o wide
+  225  04/02/26 11:30:45 docker ps --no-trunc
+  226  04/02/26 11:31:17 cd ../catalouge/
+  227  04/02/26 11:31:21 docker exec -it catalogue bash
+  228  04/02/26 11:31:38 docker exec -it catalogue:v1 bash
+  229  04/02/26 11:32:01 docker ps
+  230  04/02/26 11:32:18 docker exec -it 2a160076b2ed bash
+  231  04/02/26 11:36:02 docker network inspect roboshop
+  232  04/02/26 11:39:18 docker ps
+  233  04/02/26 11:39:45 docker rm 2a160076b2ed
+  234  04/02/26 11:39:55 docker stop 2a160076b2ed
+  235  04/02/26 11:42:41 docker rm 2a160076b2ed
+  236  04/02/26 11:42:48 docker images
+  237  04/02/26 11:43:08 docker rmi cbfa5c87d52a
+  238  04/02/26 11:44:35 git pull
+  239  04/02/26 11:45:15 cd ..
+  240  04/02/26 11:45:17 ll
+  241  04/02/26 11:45:24 cd catalogue/
+  242  04/02/26 11:45:52 docker build -t catalogue:v1 .
+  243  04/02/26 11:46:17 docker run -d --name catalogue --network roboshop catalogue:v1
+  244  04/02/26 11:46:22 cd ..
+  245  04/02/26 11:46:25 docker ps
+  246  04/02/26 11:46:30 docker ps -a
+  247  04/02/26 11:47:11 docker rm f7c9a9502e34
+  248  04/02/26 11:47:53 docker run -d --name web -p 80:80 --network roboshop web:v1
+  249  04/02/26 11:48:00 docker ps
+  250  04/02/26 11:51:07 docker logs
+  251  04/02/26 10:26:33 clear
+  252  04/02/26 10:26:42 docker --version
+  253  04/02/26 10:27:19 git clone https://github.com/cloudwithnanda/roboshop-docker.git
+  254  04/02/26 10:27:28 cd roboshop-docker/mongodb/
+  255  04/02/26 10:27:50 docker build -t mongodb:v1 .
+  256  04/02/26 10:29:34 docker network create roboshop
+  257  04/02/26 10:29:46 docker network ls
+  258  04/02/26 10:30:03 docker volume create roboshop
+  259  04/02/26 10:31:23 docker run -d --name mongodb --network roboshop -v roboshop mongodb:v1
+  260  04/02/26 10:31:36 docker ps
+  261  04/02/26 10:31:49 docker images
+  262  04/02/26 10:32:15 cd ../catalouge/
+  263  04/02/26 10:32:22 df -ht
+  264  04/02/26 10:32:26 df -h
+  265  04/02/26 10:32:43 df -h | /var/lib
+  266  04/02/26 10:32:56 df -h | ../../var/lib
+  267  04/02/26 10:33:33 docker build -t catalogue:v1 .
+  268  04/02/26 10:36:42 lsblk                      # see new disk (nvme1n1)
+  269  04/02/26 10:36:42 sudo mkfs.xfs /dev/nvme1n1   # only first time
+  270  04/02/26 10:36:43 sudo mount /dev/nvme1n1 /var/lib/docker
+  271  04/02/26 10:37:16 sudo blkid /dev/nvme1n1
+  272  04/02/26 10:37:16 sudo nano /etc/fstab
+  273  04/02/26 10:37:36 UUID=xxxx  /var/lib/docker  xfs  defaults,nofail  0 0
+  274  04/02/26 10:37:52 sudo mount -a
+  275  04/02/26 10:38:23 sudo vi /etc/fstab
+  276  04/02/26 10:39:44 sudo mount -a
+  277  04/02/26 10:39:53 df -h /var/lib/docker
+  278  04/02/26 10:40:32 docker info | grep "Docker Root Dir"
+  279  04/02/26 10:40:44 docker build -t catalogue:v1 .
+  280  04/02/26 10:41:26 sudo mkdir -p /var/lib/docker/tmp
+  281  04/02/26 10:41:26 sudo chown root:root /var/lib/docker/tmp
+  282  04/02/26 10:41:26 sudo chmod 711 /var/lib/docker/tmp
+  283  04/02/26 10:41:26 sudo systemctl restart docker
+  284  04/02/26 10:43:07 clear
+  285  04/02/26 10:43:17 cd roboshop-docker/catalouge/
+  286  04/02/26 10:43:30 docker images
+  287  04/02/26 10:44:01 docker build -t catalouge:v1 .
+  288  04/02/26 10:45:09 sudo systemctl stop docker
+  289  04/02/26 10:45:09 sudo systemctl stop containerd
+  290  04/02/26 10:45:27 sudo mkdir -p /var/lib/docker/containerd
+  291  04/02/26 10:45:27 sudo rsync -avx /var/lib/containerd/ /var/lib/docker/containerd/
+  292  04/02/26 10:45:27 sudo mv /var/lib/containerd /var/lib/containerd.bak
+  293  04/02/26 10:45:27 sudo ln -s /var/lib/docker/containerd /var/lib/containerd
+  294  04/02/26 10:46:03 sudo yum install rsync -y
+  295  04/02/26 10:46:35 sudo mkdir -p /var/lib/docker/containerd
+  296  04/02/26 10:46:35 sudo rsync -avx /var/lib/containerd/ /var/lib/docker/containerd/
+  297  04/02/26 10:46:35 sudo mv /var/lib/containerd /var/lib/containerd.bak
+  298  04/02/26 10:46:35 sudo ln -s /var/lib/docker/containerd /var/lib/containerd
+  299  04/02/26 10:46:47 sudo systemctl start containerd
+  300  04/02/26 10:46:48 sudo systemctl start docker
+  301  04/02/26 10:47:04 df -h /var/lib/containerd
+  302  04/02/26 10:47:13 sudo df -h /var/lib/containerd
+  303  04/02/26 10:47:39 sudo usermod -aG docker ec2-user
+  304  04/02/26 14:01:55 clear
+  305  04/02/26 14:02:00 ll
+  306  04/02/26 14:02:05 cd roboshop-docker/
+  307  04/02/26 14:02:08 git pull
+  308  04/02/26 14:02:10 ll
+  309  04/02/26 14:02:28 docker compose up -d
+  310  04/02/26 14:03:52 cat docker_compose.yaml
+  311  04/02/26 14:04:04 docker compose up -d
+  312  04/02/26 14:04:09 ll
+  313  04/02/26 14:07:38 git pull
+  314  04/02/26 14:07:50 docker compose up -d
+  315  04/02/26 14:09:22 docker pull
+  316  04/02/26 14:09:29 git pull
+  317  04/02/26 14:09:32 docker compose up -d
+  318  04/02/26 14:09:53 docker images
+  319  04/02/26 14:10:59 git pull
+  320  04/02/26 14:11:03 docker compose up -d
+  321  04/02/26 14:13:37 docker compose down
+  322  04/02/26 14:13:57 docker ps
+  323  04/02/26 14:14:12 docker images
+  324  04/02/26 14:14:34 docker rmi `docker images -a -q`
+  325  04/02/26 14:14:43 docker ps -a
+  326  04/02/26 14:15:10 docker rm -f `docker ps -a -q`
+  327  04/02/26 14:15:16 docker rmi `docker images -a -q`
+  328  04/02/26 14:16:16 docker compose up -d
+  329  04/02/26 14:16:31 git pul
+  330  04/02/26 14:16:35 git pull
+  331  04/02/26 14:01:55 clear
+  332  04/02/26 14:02:00 ll
+  333  04/02/26 14:02:05 cd roboshop-docker/
+  334  04/02/26 14:02:08 git pull
+  335  04/02/26 14:02:10 ll
+  336  04/02/26 14:02:28 docker compose up -d
+  337  04/02/26 14:03:52 cat docker_compose.yaml
+  338  04/02/26 14:04:04 docker compose up -d
+  339  04/02/26 14:04:09 ll
+  340  04/02/26 14:07:38 git pull
+  341  04/02/26 14:07:50 docker compose up -d
+  342  04/02/26 14:09:22 docker pull
+  343  04/02/26 14:09:29 git pull
+  344  04/02/26 14:09:32 docker compose up -d
+  345  04/02/26 14:09:53 docker images
+  346  04/02/26 14:10:59 git pull
+  347  04/02/26 14:11:03 docker compose up -d
+  348  04/02/26 14:13:37 docker compose down
+  349  04/02/26 14:13:57 docker ps
+  350  04/02/26 14:14:12 docker images
+  351  04/02/26 14:14:34 docker rmi `docker images -a -q`
+  352  04/02/26 14:14:43 docker ps -a
+  353  04/02/26 14:15:10 docker rm -f `docker ps -a -q`
+  354  04/02/26 14:15:16 docker rmi `docker images -a -q`
+  355  04/02/26 14:16:16 docker compose up -d
+  356  04/02/26 14:16:31 git pul
+  357  04/02/26 14:16:35 git pull
+  358  04/02/26 17:49:10 clear
+  359  04/02/26 17:49:12 ll
+  360  04/02/26 17:49:21 cd roboshop-docker/
+  361  04/02/26 17:49:26 cd mongodb/
+  362  04/02/26 17:49:54 docker build -t mongodb:v1 .
+  363  04/02/26 17:50:10 cd ../catalogue/
+  364  04/02/26 17:50:39 docker build -t catalogue:v1 .
+  365  04/02/26 17:50:58 cd ../web/
+  366  04/02/26 17:51:14 docker build -t web:v1 .
+  367  04/02/26 17:51:19 cd ..
+  368  04/02/26 17:51:22 ll
+  369  04/02/26 17:51:33 docker compose up -d
+  370  04/02/26 17:51:49 docker images
+  371  04/02/26 17:52:27 docker network ls
+  372  04/02/26 17:52:40 docker inspect roboshop
+  373  04/02/26 17:55:13 cat docker-compose.yaml
+  374  04/02/26 17:57:27 docker ps
+  375  04/02/26 17:57:31 docker ps -a
+  376  04/02/26 17:57:46 docker images
+  377  04/02/26 17:58:55 docker rm -f `docker ps -a -q`
+  378  04/02/26 18:00:24 docker compose up -d
+  379  04/02/26 18:01:25 git pull
+  380  04/02/26 18:01:28 docker compose up -d
+  381  04/02/26 18:02:37 docker compose down -d
+  382  04/02/26 18:03:17 docker compose down
+  383  04/02/26 18:04:58 history
